@@ -5,7 +5,7 @@ import pandas as pd
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Data Dictionary", page_icon="📚", layout="wide")
-st.logo("assets/lfb_logo.png")
+#st.logo("assets/lfb_logo.png")
 
 st.title("Data Dictionary & Feature Definitions")
 st.markdown("A comprehensive guide to the operational metrics, spatial coordinates, and engineered features used by the LightGBM predictive model.")
@@ -73,8 +73,8 @@ st.markdown("The following table outlines the most impactful features retained a
 
 # Display the dataframe with custom column widths
 st.dataframe(
-    df_dict, 
-    use_container_width=True, 
+    df_dict,
+    use_container_width=True,
     hide_index=True,
     column_config={
         "Feature Name": st.column_config.TextColumn("Feature Name", width="medium"),
@@ -94,14 +94,14 @@ with col1:
     st.markdown("### 🛠️ Dimensionality Reduction")
     st.info("""
     **Handling High Cardinality:** The raw dataset contained exceptionally dense categorical variables (like specific addresses and ward codes) totaling over **534 raw features** after initial One-Hot Encoding.
-    
+
     To maintain memory efficiency and prevent the tree-based models from overfitting, a custom preprocessor was built. It evaluated the **Pearson Correlation** of each category against the target response time, retaining only the top statistically significant categories and bundling the rest into an 'Other' classification. This reduced the feature matrix to a highly optimized **269 features**.
     """)
 
 with col2:
     st.markdown("### 🚫 Target Leakage Prevention")
     st.warning("""
-    **Post-Incident Variables:** During Phase 1, features such as `PumpMinutesRounded` and `NumPumpsAttending` were removed from the training matrix. 
-    
+    **Post-Incident Variables:** During Phase 1, features such as `PumpMinutesRounded` and `NumPumpsAttending` were removed from the training matrix.
+
     Because these values represent the *total effort* applied after the engines have already arrived and resolved the fire, including them would cause "Target Leakage"—allowing the model to artificially cheat by looking into the future. Removing them ensures the LightGBM model relies solely on data known *at the exact moment the 999 call is placed*.
     """)

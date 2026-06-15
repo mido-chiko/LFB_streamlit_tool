@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Prediction Simulator", page_icon="🔮", layout="wide")
-st.logo("assets/lfb_logo.png")
+#st.logo("assets/lfb_logo.png")
 
 st.title("Interactive Scenario Simulator")
 st.markdown("Select a real historical incident, adjust key operational variables, and watch the LightGBM algorithm recalculate the expected response time in real-time.")

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Interpretability", page_icon="🧠", layout="wide")
-st.logo("assets/lfb_logo.png")
+#st.logo("assets/lfb_logo.png")
 
 st.title("Model Interpretability (SHAP)")
 st.markdown("Understanding the inner workings of the Champion LightGBM Model. Shapley Additive exPlanations (SHAP) break down exactly how much each feature contributed to the final predicted attendance time.")

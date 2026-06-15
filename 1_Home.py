@@ -4,8 +4,8 @@ import streamlit as st
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Project Home", page_icon="🚒", layout="wide")
-st.logo("assets/lfb_logo.png")
-st.image("assets/lfb_logo.png", width=300)
+#st.logo("assets/lfb_logo.png")
+#st.image("assets/lfb_logo.png", width=300)
 
 
 # -----------------------------------------------------------------------------
@@ -24,11 +24,11 @@ col1, col2 = st.columns([2, 1])
 with col1:
     st.markdown("### 🎯 Project Objective")
     st.markdown("""
-    This project details a comprehensive, end-to-end machine learning pipeline developed to accurately predict the `Average_AttendanceTimeSeconds` for London Fire Brigade (LFB) incidents. 
-    
+    This project details a comprehensive, end-to-end machine learning pipeline developed to accurately predict the `Average_AttendanceTimeSeconds` for London Fire Brigade (LFB) incidents.
+
     By transforming raw operational logs into a robust predictive model, this tool provides strategic value for concurrent resource planning and emergency dispatch optimization.
     """)
-    
+
     st.markdown("### 🏗️ Methodology & Pipeline")
     st.markdown("""
     The project adheres to a strict, milestone-driven methodology:

@@ -11,8 +11,8 @@ import colorsys
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Dashboard", page_icon="🚒", layout="wide")
 #st.sidebar.image("assets/lfb_logo.png", width=100)
-st.logo("assets/lfb_logo.png")
-st.image("assets/lfb_logo.png", width=300)
+#st.logo("assets/lfb_logo.png")
+#st.image("assets/lfb_logo.png", width=300)
 st.title("London Fire Brigade Incident Records")
 st.markdown("Interactive dashboard showing London Fire Brigade incident data.")
 

@@ -10,7 +10,7 @@ from sklearn.metrics import root_mean_squared_error
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Time Series", page_icon="📈", layout="wide")
-st.logo("assets/lfb_logo.png")
+#st.logo("assets/lfb_logo.png")
 
 st.title("Time Series Analysis & Forecasting")
 st.markdown("Predictive forecasting of London Fire Brigade average attendance times using optimized Prophet models for daily and monthly aggregations.")
@@ -25,11 +25,11 @@ def load_ts_data():
     daily_df = pd.read_parquet('data.parquet_daily_series_df', engine='fastparquet')
     df_daily = daily_df.set_index('DateOfCall').reset_index()
     df_daily = df_daily.rename(columns={"DateOfCall": "ds", "Average_AttendanceTimeSeconds": "y"})
-    
+
     # Load Monthly Data
     monthly_df = pd.read_parquet('data.parquet_monthly_new', engine='fastparquet')
     df_monthly = monthly_df.rename(columns={"DateTime": "ds", "Average_AttendanceTimeSeconds": "y"})
-    
+
     return df_daily, df_monthly
 
 @st.cache_resource
@@ -103,14 +103,14 @@ def plot_interactive_forecast(df_actual, df_pred, test_size, title, y_label, cut
     # FIX: Convert datetime to ms timestamp float to bypass Pandas math errors
     split_date_ms = pd.to_datetime(split_date).timestamp() * 1000
 
-    fig.add_vline(x=split_date_ms, line_width=2, line_dash="dash", line_color="red", 
+    fig.add_vline(x=split_date_ms, line_width=2, line_dash="dash", line_color="red",
                   annotation_text="Train/Test Split", annotation_position="top left")
-                  
+
     # Custom Cutoff Line
     if cutoff_date:
         # Convert custom date to ms timestamp float as well
         cutoff_date_ms = pd.to_datetime(cutoff_date).timestamp() * 1000
-        fig.add_vline(x=cutoff_date_ms, line_width=2, line_color="red", 
+        fig.add_vline(x=cutoff_date_ms, line_width=2, line_color="red",
                       annotation_text="Key Event", annotation_position="bottom right")
 
     fig.update_layout(
@@ -128,21 +128,21 @@ tab1, tab2, tab3 = st.tabs(["📅 Daily Forecast", "🗓️ Monthly Forecast", "
 
 with tab1:
     st.markdown("### Daily Average Attendance Time Forecast")
-    
+
     col1, col2 = st.columns([1, 3])
     with col1:
         st.info("#### Model Evaluation")
         st.metric(label="Testing RMSE", value=f"{rmse_daily:.2f} Sec")
         st.markdown("**Test Horizon:** 727 Days")
         st.markdown("**Algorithm:** Prophet")
-        
+
     with col2:
         # Plot using our interactive function
         fig_d = plot_interactive_forecast(
-            df_actual=df_daily, 
-            df_pred=pred_daily, 
-            test_size=727, 
-            title='Optimized Prophet Model: Daily Predictions', 
+            df_actual=df_daily,
+            df_pred=pred_daily,
+            test_size=727,
+            title='Optimized Prophet Model: Daily Predictions',
             y_label='Avg Attendance Time (Sec)',
             cutoff_date=datetime.date(2023, 11, 4)
         )
@@ -150,20 +150,20 @@ with tab1:
 
 with tab2:
     st.markdown("### Monthly Average Attendance Time Forecast")
-    
+
     col1, col2 = st.columns([1, 3])
     with col1:
         st.info("#### Model Evaluation")
         st.metric(label="Testing RMSE", value=f"{rmse_monthly:.2f} Sec")
         st.markdown("**Test Horizon:** 24 Months")
         st.markdown("**Algorithm:** Prophet")
-        
+
     with col2:
         fig_m = plot_interactive_forecast(
-            df_actual=df_monthly, 
-            df_pred=pred_monthly, 
-            test_size=24, 
-            title='Optimized Prophet Model: Monthly Predictions', 
+            df_actual=df_monthly,
+            df_pred=pred_monthly,
+            test_size=24,
+            title='Optimized Prophet Model: Monthly Predictions',
             y_label='Avg Attendance Time (Sec)'
         )
         st.plotly_chart(fig_m, use_container_width=True)
@@ -171,12 +171,12 @@ with tab2:
 with tab3:
     st.markdown("### Time Series Decomposition (Daily Model)")
     st.markdown("Breaking down the historical data into structural components: overall trend, weekly variations, and yearly seasonality.")
-    
+
     try:
         from prophet.plot import plot_components_plotly
         # Prophet has a native Plotly component generator
         fig_comp = plot_components_plotly(model_daily, pred_daily)
-        
+
         # Prophet returns a list of figures or a subplot figure depending on version.
         # Ensure it renders nicely in Streamlit
         fig_comp.update_layout(height=800, margin=dict(t=30, b=30, l=0, r=0))
