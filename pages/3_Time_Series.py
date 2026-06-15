@@ -15,7 +15,6 @@ st.set_page_config(page_title="LFB Time Series", page_icon="📈", layout="wide"
 st.title("Time Series Analysis & Forecasting")
 st.markdown("Predictive forecasting of London Fire Brigade average attendance times using optimized Prophet models for daily and monthly aggregations.")
 st.divider()
-
 # -----------------------------------------------------------------------------
 # 2. Data & Model Loading (Cached)
 # -----------------------------------------------------------------------------
@@ -35,6 +34,39 @@ def load_ts_data():
     df_monthly = monthly_df.rename(columns={"DateTime": "ds", "Average_AttendanceTimeSeconds": "y"})
 
     return df_daily, df_monthly
+
+@st.cache_resource
+def load_ts_models():
+    # Intelligently find the models whether they are in the root or the models folder
+    daily_model_path = 'models/TS_daily_ph_model.pkl' if os.path.exists('models/TS_daily_ph_model.pkl') else 'TS_daily_ph_model.pkl'
+    monthly_model_path = 'models/monthly_TS_model.pkl' if os.path.exists('models/monthly_TS_model.pkl') else 'monthly_TS_model.pkl'
+
+    # Load Pre-trained Prophet Models
+    daily_model = joblib.load(daily_model_path)
+    monthly_model = joblib.load(monthly_model_path)
+    return daily_model, monthly_model
+
+@st.cache_data
+def generate_forecasts(_model, periods, freq):
+    # Generate future dataframe and predict
+    future = _model.make_future_dataframe(periods=periods, freq=freq)
+    predictions = _model.predict(future)
+    return predictions
+
+# --- Execute Loading and Calculations ---
+df_daily, df_monthly = load_ts_data()
+model_daily, model_monthly = load_ts_models()
+
+# Generate Predictions
+pred_daily = generate_forecasts(model_daily, periods=727, freq='D')
+pred_monthly = generate_forecasts(model_monthly, periods=24, freq='ME')
+
+# Define test sets and calculate RMSE
+test_daily = df_daily.iloc[-727:]
+rmse_daily = root_mean_squared_error(test_daily['y'], pred_daily['yhat'].tail(727))
+
+test_monthly = df_monthly.iloc[-24:]
+rmse_monthly = root_mean_squared_error(test_monthly['y'], pred_monthly['yhat'].tail(24))
 
 @st.cache_resource
 def load_ts_models():
