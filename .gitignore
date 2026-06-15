@@ -1,0 +1,21 @@
+# Ignore environments and caches
+__pycache__/
+.venv/
+venv/
+.env
+
+# Ignore all large raw datasets and un-sampled models
+*.parquet_*
+shap_values.pkl
+data.parquet_df_clean_vis_filtered
+y_test.parquet
+LFB_inc_new*
+LFB_mob_new*
+X_train*
+
+# ONLY allow our specific deployment files in the models folder
+!models/*_deploy.parquet
+!models/*_deploy.pkl
+!models/lightgbm_regression_model.pkl
+!models/TS_daily_ph_model.pkl
+!models/monthly_TS_model.pkl
