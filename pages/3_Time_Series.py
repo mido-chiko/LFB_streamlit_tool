@@ -5,7 +5,7 @@ import datetime
 import joblib
 import plotly.graph_objects as go
 from sklearn.metrics import root_mean_squared_error
-
+import os # Add this at the very top of your file with the other imports if it isn't there
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
@@ -15,7 +15,6 @@ st.set_page_config(page_title="LFB Time Series", page_icon="📈", layout="wide"
 st.title("Time Series Analysis & Forecasting")
 st.markdown("Predictive forecasting of London Fire Brigade average attendance times using optimized Prophet models for daily and monthly aggregations.")
 st.divider()
-mport os # Add this at the very top of your file with the other imports if it isn't there
 
 # -----------------------------------------------------------------------------
 # 2. Data & Model Loading (Cached)
