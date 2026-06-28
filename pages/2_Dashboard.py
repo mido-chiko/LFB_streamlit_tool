@@ -19,7 +19,7 @@ st.markdown("Interactive dashboard showing London Fire Brigade incident data.")
 @st.cache_data
 def load_and_preprocess_data():
     # Load data using pyarrow/fastparquet
-    df = pd.read_parquet('models/dashboard_deploy.parquet', engine='fastparquet')
+    df = pd.read_parquet('models/dashboard_deploy.parquet', engine='pyarrow')
 
     # Simpler preprocessing that avoids categorical mapping issues
     df_processed = df.copy()
@@ -265,9 +265,9 @@ if has_map_cols:
             max_map_points = st.slider(
                 "Max Map Points",
                 min_value=100,
-                max_value=15000,
-                value=5000,
-                step=100,
+                max_value=1000,
+                value=500,
+                step=10,
                 help="Lower this number if the map feels slow or laggy."
             )
 
