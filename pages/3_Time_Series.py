@@ -162,7 +162,7 @@ with tab1:
             y_label='Avg Attendance Time (Sec)',
             cutoff_date=datetime.date(2023, 11, 4)
         )
-        st.plotly_chart(fig_d, use_container_width=True)
+        st.plotly_chart(fig_d, width="stretch")
 
 with tab2:
     st.markdown("### Monthly Average Attendance Time Forecast")
@@ -182,7 +182,7 @@ with tab2:
             title='Optimized Prophet Model: Monthly Predictions',
             y_label='Avg Attendance Time (Sec)'
         )
-        st.plotly_chart(fig_m, use_container_width=True)
+        st.plotly_chart(fig_m, width="stretch")
 
 with tab3:
     st.markdown("Time Series Decomposition (Daily Model)")
@@ -196,6 +196,6 @@ with tab3:
         # Prophet returns a list of figures or a subplot figure depending on version.
         # Ensure it renders nicely in Streamlit
         fig_comp.update_layout(height=800, margin=dict(t=30, b=30, l=0, r=0))
-        st.plotly_chart(fig_comp, use_container_width=True)
+        st.plotly_chart(fig_comp, width="stretch")
     except ImportError:
         st.warning("To view interactive components, ensure `prophet` is installed in your Streamlit environment.")

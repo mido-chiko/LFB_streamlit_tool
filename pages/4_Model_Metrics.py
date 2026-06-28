@@ -72,7 +72,7 @@ with tab1:
     display_df['Test MAE'] = display_df['Test MAE'].apply(lambda x: f"{x:.2f} s")
     display_df['Test R²'] = display_df['Test R²'].apply(lambda x: f"{x:.3f}")
 
-    st.dataframe(display_df, use_container_width=True, hide_index=True)
+    st.dataframe(display_df, width="stretch", hide_index=True)
 
 with tab2:
     st.markdown("### Metrics Visualization")
@@ -90,7 +90,7 @@ with tab2:
             color_discrete_map={'Linear': '#6c757d', 'Tree': '#28a745', 'Neural Network': '#17a2b8'}
         )
         fig_rmse.add_vline(x=72.36, line_dash="dash", line_color="red", annotation_text="Best: 72.36s")
-        st.plotly_chart(fig_rmse, use_container_width=True)
+        st.plotly_chart(fig_rmse, width="stretch")
 
     with c2:
         # R-Squared Chart (Higher is better)
@@ -104,7 +104,7 @@ with tab2:
             color_discrete_map={'Linear': '#6c757d', 'Tree': '#28a745', 'Neural Network': '#17a2b8'}
         )
         fig_r2.add_vline(x=0.706, line_dash="dash", line_color="red", annotation_text="Best: 0.706")
-        st.plotly_chart(fig_r2, use_container_width=True)
+        st.plotly_chart(fig_r2, width="stretch")
 
 with tab3:
     st.markdown("Deep Learning vs. Tree-Based Ensembles")
@@ -144,4 +144,4 @@ with tab3:
             title="Top 3 Models Relative Footprint (Larger Area = Better)",
             margin=dict(t=50, b=0, l=0, r=0)
         )
-        st.plotly_chart(fig_radar, use_container_width=True)
+        st.plotly_chart(fig_radar, width="stretch")

@@ -74,7 +74,7 @@ st.markdown("The following table outlines the most impactful features retained a
 # Display the dataframe with custom column widths
 st.dataframe(
     df_dict,
-    use_container_width=True,
+    width="stretch",
     hide_index=True,
     column_config={
         "Feature Name": st.column_config.TextColumn("Feature Name", width="medium"),

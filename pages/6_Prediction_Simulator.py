@@ -155,7 +155,7 @@ if data_loaded:
         ))
 
         fig_gauge.update_layout(height=350, margin=dict(l=20, r=20, t=50, b=20))
-        st.plotly_chart(fig_gauge, use_container_width=True)
+        st.plotly_chart(fig_gauge, width="stretch")
 
     # --- Bottom Comparative Analysis ---
     st.markdown("Scenario Breakdown")
@@ -183,4 +183,4 @@ if data_loaded:
         margin=dict(l=0, r=0, t=30, b=0),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
-    st.plotly_chart(fig_bar, use_container_width=True)
+    st.plotly_chart(fig_bar, width="stretch")
