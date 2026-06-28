@@ -1,16 +1,21 @@
 import os
+
+# MUST BE AT THE ABSOLUTE TOP: Set limits BEFORE importing any ML libraries!
 os.environ['OMP_NUM_THREADS'] = '1'
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
 os.environ['MKL_NUM_THREADS'] = '1'
 os.environ['VECLIB_MAXIMUM_THREADS'] = '1'
 os.environ['NUMEXPR_NUM_THREADS'] = '1'
+os.environ['NUMBA_NUM_THREADS'] = '1'
+
+# NOW it is safe to import the rest
 import scipy
 import streamlit as st
+
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
 st.set_page_config(page_title="LFB Project Home", layout="wide")
-
 # -----------------------------------------------------------------------------
 # 2. Header & Title
 # -----------------------------------------------------------------------------

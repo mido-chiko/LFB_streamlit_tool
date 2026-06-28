@@ -23,17 +23,17 @@ def load_simulator_resources():
     model = joblib.load('models/lightgbm_regression_model.pkl')
 
     # Load the processed test set (269 columns)
-    X_test_processed = pd.read_parquet('models/X_test_proc_deploy.parquet', engine='fastparquet')
+    X_test_processed = pd.read_parquet('models/X_test_proc_deploy.parquet', engine='pyarrow')
 
     # Load the raw test set for human-readable context
     try:
-        X_test_raw = pd.read_parquet('models/X_test_raw_deploy.parquet', engine='fastparquet')
+        X_test_raw = pd.read_parquet('models/X_test_raw_deploy.parquet', engine='pyarrow')
     except:
         X_test_raw = X_test_processed.copy()
 
     # Load the target values
     try:
-        y_test = pd.read_parquet('models/y_test_deploy.parquet', engine='fastparquet')
+        y_test = pd.read_parquet('models/y_test_deploy.parquet', engine='pyarrow')
         if isinstance(y_test, pd.DataFrame):
             y_test = y_test.iloc[:, 0] # Extract series if saved as df
     except:

@@ -6,7 +6,7 @@ pydeck
 lightgbm
 shap
 joblib
-fastparquet
+pyarrow
 pyproj
 prophet
 matplotlib

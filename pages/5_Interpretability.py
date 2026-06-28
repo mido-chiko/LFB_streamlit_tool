@@ -26,7 +26,7 @@ def load_shap_data():
 
     # Attempt to load the engineered test set
     try:
-        X_test_processed = pd.read_parquet('models/X_test_proc_deploy.parquet', engine='fastparquet')
+        X_test_processed = pd.read_parquet('models/X_test_proc_deploy.parquet', engine='pyarrow')
     except FileNotFoundError:
         # If the processed file is missing, we raise an explicit error to prevent dimension crashes
         raise FileNotFoundError("Could not find 'data.parquet_X_test_processed'. Please save X_test_processed to parquet in your notebook.")

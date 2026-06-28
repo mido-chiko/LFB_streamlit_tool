@@ -23,12 +23,12 @@ def load_ts_data():
     monthly_path = 'models/data.parquet_monthly_new' if os.path.exists('models/data.parquet_monthly_new') else 'data.parquet_monthly_new'
 
     # Load Daily Data
-    daily_df = pd.read_parquet(daily_path, engine='fastparquet')
+    daily_df = pd.read_parquet(daily_path, engine='pyarrow')
     df_daily = daily_df.set_index('DateOfCall').reset_index()
     df_daily = df_daily.rename(columns={"DateOfCall": "ds", "Average_AttendanceTimeSeconds": "y"})
 
     # Load Monthly Data
-    monthly_df = pd.read_parquet(monthly_path, engine='fastparquet')
+    monthly_df = pd.read_parquet(monthly_path, engine='pyarrow')
     df_monthly = monthly_df.rename(columns={"DateTime": "ds", "Average_AttendanceTimeSeconds": "y"})
 
     return df_daily, df_monthly
