@@ -168,14 +168,14 @@ with c1:
         color_discrete_map={'Fire': '#dc3545', 'Special Service': '#28a745', 'False Alarm': '#ffc107'}
     )
     fig_pie.update_layout(showlegend=True, margin=dict(t=30, b=0, l=0, r=0))
-    st.plotly_chart(fig_pie, use_container_width=True)
+    st.plotly_chart(fig_pie, width="stretch")
 
 with c2:
     st.markdown("<h5 style='text-align: center; color: #1a3f6c;'>Incidents by Hour of Day</h5>", unsafe_allow_html=True)
     hourly_data = filtered_df['HourOfCall'].value_counts().sort_index()
     fig_hourly = go.Figure(go.Bar(x=hourly_data.index, y=hourly_data.values, marker_color='#1a3f6c', opacity=0.8))
     fig_hourly.update_layout(xaxis_title='Hour of Day', yaxis_title='Count', margin=dict(t=30, b=0, l=0, r=0))
-    st.plotly_chart(fig_hourly, use_container_width=True)
+    st.plotly_chart(fig_hourly, width="stretch")
 
 with c3:
     st.markdown("<h5 style='text-align: center; color: #1a3f6c;'>Monthly Trend</h5>", unsafe_allow_html=True)
@@ -188,7 +188,7 @@ with c3:
         color_discrete_map={'Fire': '#dc3545', 'Special Service': '#28a745', 'False Alarm': '#ffc107'}
     )
     fig_trend.update_layout(xaxis_title='Year', yaxis_title='Count', margin=dict(t=30, b=0, l=0, r=0))
-    st.plotly_chart(fig_trend, use_container_width=True)
+    st.plotly_chart(fig_trend, width="stretch")
 
 # Row 2 Charts
 c4, c5 = st.columns(2)
@@ -204,7 +204,7 @@ with c4:
         color_continuous_scale='Blues'
     )
     fig_borough.update_layout(xaxis_title='Number of Incidents', yaxis_title='Borough', showlegend=False, margin=dict(t=30, b=0, l=0, r=0))
-    st.plotly_chart(fig_borough, use_container_width=True)
+    st.plotly_chart(fig_borough, width="stretch")
 
 with c5:
     st.markdown("<h5 style='text-align: center; color: #1a3f6c;'>Incident Response Times</h5>", unsafe_allow_html=True)
@@ -226,7 +226,7 @@ with c5:
         fig_response.add_annotation(text="Response time data not available", xref="paper", yref="paper", x=0.5, y=0.5, showarrow=False)
 
     fig_response.update_layout(xaxis_title='Incident Type', yaxis_title='Avg Seconds', margin=dict(t=30, b=0, l=0, r=0))
-    st.plotly_chart(fig_response, use_container_width=True)
+    st.plotly_chart(fig_response, width="stretch")
 
 st.divider()
 # -----------------------------------------------------------------------------
@@ -374,7 +374,7 @@ if has_map_cols:
             #map_style='light'
         )
 
-        st.pydeck_chart(r, use_container_width=True)
+        st.pydeck_chart(r, width="stretch")
     else:
         st.warning("No coordinate data available for the currently selected filters.")
 else:
@@ -390,4 +390,4 @@ table_columns = ['IncidentNumber', 'DateOfCall', 'IncidentGroup', 'StopCodeDescr
 available_columns = [col for col in table_columns if col in filtered_df.columns]
 
 # Streamlit handles pagination natively
-st.dataframe(filtered_df[available_columns], use_container_width=True)
+st.dataframe(filtered_df[available_columns], width="stretch")
