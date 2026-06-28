@@ -4,7 +4,7 @@ import pandas as pd
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Data Dictionary", page_icon="📚", layout="wide")
+st.set_page_config(page_title="LFB Data Dictionary", layout="wide")
 #st.logo("assets/lfb_logo.png")
 
 st.title("Data Dictionary & Feature Definitions")
@@ -68,7 +68,7 @@ df_dict = load_data_dictionary()
 # -----------------------------------------------------------------------------
 # 3. Layout & Presentation
 # -----------------------------------------------------------------------------
-st.markdown("### 🔑 Core Features & Target Variable")
+st.markdown("Core Features & Target Variable")
 st.markdown("The following table outlines the most impactful features retained after our high-cardinality dimensionality reduction and correlation filtering.")
 
 # Display the dataframe with custom column widths
@@ -91,7 +91,7 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("### 🛠️ Dimensionality Reduction")
+    st.markdown("Dimensionality Reduction")
     st.info("""
     **Handling High Cardinality:** The raw dataset contained exceptionally dense categorical variables (like specific addresses and ward codes) totaling over **534 raw features** after initial One-Hot Encoding.
 
@@ -99,7 +99,7 @@ with col1:
     """)
 
 with col2:
-    st.markdown("### 🚫 Target Leakage Prevention")
+    st.markdown("Target Leakage Prevention")
     st.warning("""
     **Post-Incident Variables:** During Phase 1, features such as `PumpMinutesRounded` and `NumPumpsAttending` were removed from the training matrix.
 

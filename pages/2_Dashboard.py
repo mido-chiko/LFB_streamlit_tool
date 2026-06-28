@@ -9,10 +9,7 @@ import colorsys
 # -----------------------------------------------------------------------------
 # 1. Page Configuration
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Dashboard", page_icon="🚒", layout="wide")
-#st.sidebar.image("assets/lfb_logo.png", width=100)
-#st.logo("assets/lfb_logo.png")
-#st.image("assets/lfb_logo.png", width=300)
+st.set_page_config(page_title="LFB Dashboard", layout="wide")
 st.title("London Fire Brigade Incident Records")
 st.markdown("Interactive dashboard showing London Fire Brigade incident data.")
 
@@ -235,7 +232,7 @@ st.divider()
 # -----------------------------------------------------------------------------
 # 7. Map Section (Station to Incident Arcs)
 # -----------------------------------------------------------------------------
-st.markdown("### 🗺️ Incident Response Map")
+st.markdown("Incident Response Map")
 st.markdown("Visualizing the response path from Stations (Large Blue Dots) to Incidents. Paths are color-coded by **Delay Code**.")
 
 # Check for our transformed coordinate columns

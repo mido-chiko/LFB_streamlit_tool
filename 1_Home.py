@@ -3,10 +3,7 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Project Home", page_icon="🚒", layout="wide")
-#st.logo("assets/lfb_logo.png")
-#st.image("assets/lfb_logo.png", width=300)
-
+st.set_page_config(page_title="LFB Project Home", layout="wide")
 
 # -----------------------------------------------------------------------------
 # 2. Header & Title
@@ -22,14 +19,14 @@ st.divider()
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.markdown("### 🎯 Project Objective")
+    st.markdown("### Project Objective")
     st.markdown("""
     This project details a comprehensive, end-to-end machine learning pipeline developed to accurately predict the `Average_AttendanceTimeSeconds` for London Fire Brigade (LFB) incidents.
 
     By transforming raw operational logs into a robust predictive model, this tool provides strategic value for concurrent resource planning and emergency dispatch optimization.
     """)
 
-    st.markdown("### 🏗️ Methodology & Pipeline")
+    st.markdown("Methodology & Pipeline")
     st.markdown("""
     The project adheres to a strict, milestone-driven methodology:
     * **Phase 1: Scoping & Data Exploration** — Processing >1.9 million valid records from combined Incident and Mobilisation datasets.
@@ -39,7 +36,7 @@ with col1:
     """)
 
 with col2:
-    st.info("#### 📊 Dataset Scale")
+    st.info("Dataset Scale")
     st.metric(label="Total Processed Records", value="> 1.9 Million")
     st.metric(label="Raw Feature Space", value="534 Features")
     st.metric(label="Optimized Feature Matrix", value="269 Features")
@@ -49,7 +46,7 @@ st.divider()
 # -----------------------------------------------------------------------------
 # 4. Key Achievements / Final Results
 # -----------------------------------------------------------------------------
-st.markdown("### 🏆 Apex Modeling Results")
+st.markdown("Apex Modeling Results")
 st.markdown("The deployment of the **LightGBM** framework represents the apex of the predictive pipeline. After removing post-incident logistical noise, the model efficiently mapped spatial-temporal interactions via leaf-wise tree growth, achieving exceptional stability between training and testing data.")
 
 r1, r2, r3 = st.columns(3)
@@ -73,7 +70,7 @@ with r3:
 # 5. Navigation Guide
 # -----------------------------------------------------------------------------
 st.divider()
-st.markdown("### 🧭 Application Navigation")
+st.markdown("Application Navigation")
 st.markdown("""
 Use the sidebar to explore the complete lifecycle of this project:
 1. **Data Dictionary:** Definitions of the LFB operational features.

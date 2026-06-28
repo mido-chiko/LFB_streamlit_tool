@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Prediction Simulator", page_icon="🔮", layout="wide")
+st.set_page_config(page_title="LFB Prediction Simulator", layout="wide")
 #st.logo("assets/lfb_logo.png")
 
 st.title("Interactive Scenario Simulator")
@@ -46,7 +46,7 @@ try:
     model, X_test_processed, X_test_raw, y_test = load_simulator_resources()
     data_loaded = True
 except Exception as e:
-    st.error(f"⚠️ Error loading resources: {e}")
+    st.error(f" Error loading resources: {e}")
     data_loaded = False
 
 # -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ except Exception as e:
 # -----------------------------------------------------------------------------
 if data_loaded:
     # --- Sidebar Controls ---
-    st.sidebar.markdown("### 🎯 1. Select an Incident")
+    st.sidebar.markdown("1. Select an Incident")
 
     # Let the user pick from the first 500 incidents in the test set
     max_idx = min(500, len(X_test_processed) - 1)
@@ -72,17 +72,17 @@ if data_loaded:
     col1, col2, col3 = st.columns([1.5, 1, 1])
 
     with col1:
-        st.markdown("#### 🚨 Incident Context")
+        st.markdown("Incident Context")
         st.info(f"**Incident Type:** {base_row_raw.get('IncidentGroup', 'Unknown')}  \n"
                 f"**Hour of Call:** {base_row_raw.get('HourOfCall', 'Unknown')}:00  \n"
                 f"**Standardized Distance:** {base_row_proc['distance'].values[0]:.2f}")
 
     with col2:
-        st.markdown("#### ⏱️ Actual Time")
+        st.markdown("Actual Time")
         st.metric("Recorded Arrival", f"{int(actual_time)} sec")
 
     with col3:
-        st.markdown("#### 🤖 Baseline Prediction")
+        st.markdown("Baseline Prediction")
         error = abs(baseline_pred - actual_time)
         error_color = "normal" if error <= 52.27 else "inverse" # 52.27 is your MAE
         st.metric(
@@ -95,7 +95,7 @@ if data_loaded:
     st.divider()
 
     # --- The "What-If" Engine ---
-    st.markdown("### 🎛️ 2. What-If Scenario Tweak")
+    st.markdown("2. What-If Scenario Tweak")
     st.markdown("Adjust the operational constraints below. The dial on the right will update in real-time, showing how logistical changes impact the LFB response targets.")
 
     control_col, chart_col = st.columns([1, 1.2])
@@ -108,19 +108,19 @@ if data_loaded:
 
         # Distance Tweak
         if 'distance' in sim_row_proc.columns:
-            dist_multiplier = st.slider("🛣️ Adjust Distance to Incident (%)", min_value=10, max_value=300, value=100, step=5,
+            dist_multiplier = st.slider("Adjust Distance to Incident (%)", min_value=10, max_value=300, value=100, step=5,
                                         help="Simulate the engine traveling a shorter or longer route.")
             sim_row_proc['distance'] = sim_row_proc['distance'] * (dist_multiplier / 100.0)
 
         # Easting Tweak
         if 'Easting_m' in sim_row_proc.columns:
-            easting_shift = st.slider("🗺️ Shift Geographic Location (Easting)", min_value=-3.0, max_value=3.0, value=0.0, step=0.1,
+            easting_shift = st.slider("Shift Geographic Location (Easting)", min_value=-3.0, max_value=3.0, value=0.0, step=0.1,
                                       help="Simulate the incident occurring in a different geographic sector.")
             sim_row_proc['Easting_m'] = sim_row_proc['Easting_m'] + easting_shift
 
         # Hour of Call Tweak
         if 'HourOfCall' in sim_row_proc.columns:
-            hour_shift = st.slider("🕒 Shift Time of Day", min_value=-3.0, max_value=3.0, value=0.0, step=0.1,
+            hour_shift = st.slider("Shift Time of Day", min_value=-3.0, max_value=3.0, value=0.0, step=0.1,
                                    help="Simulate the incident happening at a different traffic peak hour.")
             sim_row_proc['HourOfCall'] = sim_row_proc['HourOfCall'] + hour_shift
 
@@ -158,14 +158,14 @@ if data_loaded:
         st.plotly_chart(fig_gauge, use_container_width=True)
 
     # --- Bottom Comparative Analysis ---
-    st.markdown("### 📊 Scenario Breakdown")
+    st.markdown("Scenario Breakdown")
 
     # Dynamic text based on outcome
     delta = simulated_pred - baseline_pred
     if delta > 0:
-        st.error(f"⚠️ **Logistical Delay:** These simulated changes increased the expected response time by **{int(delta)} seconds**.")
+        st.error(f" **Logistical Delay:** These simulated changes increased the expected response time by **{int(delta)} seconds**.")
     elif delta < 0:
-        st.success(f"✅ **Operational Optimization:** These simulated changes decreased the expected response time by **{int(abs(delta))} seconds**.")
+        st.success(f" **Operational Optimization:** These simulated changes decreased the expected response time by **{int(abs(delta))} seconds**.")
     else:
         st.info("The model indicates the response time is resilient to these specific changes.")
 

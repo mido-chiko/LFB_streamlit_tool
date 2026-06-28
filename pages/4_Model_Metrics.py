@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Model Metrics", page_icon="📊", layout="wide")
+st.set_page_config(page_title="LFB Model Metrics", layout="wide")
 #st.logo("assets/lfb_logo.png")
 
 st.title("Machine Learning Evaluation")
@@ -46,7 +46,7 @@ metrics_df = load_model_metrics()
 # -----------------------------------------------------------------------------
 # 3. High-Level Winner Highlight
 # -----------------------------------------------------------------------------
-st.markdown("### 🏆 The Champion Model: LightGBM")
+st.markdown("The Champion Model: LightGBM")
 st.markdown("Following the removal of noisy post-incident features (e.g., `PumpMinutesRounded`), the LightGBM framework achieved the highest predictive accuracy. It successfully mapped over 70% of the variance in emergency response times without succumbing to severe overfitting.")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -60,7 +60,7 @@ st.divider()
 # -----------------------------------------------------------------------------
 # 4. Interactive Evaluation Tabs
 # -----------------------------------------------------------------------------
-tab1, tab2, tab3 = st.tabs(["📊 Performance Leaderboard", "📈 Visual Comparison", "🧠 DL vs Ensembles"])
+tab1, tab2, tab3 = st.tabs(["Performance Leaderboard", "Visual Comparison", "DL vs Ensembles"])
 
 with tab1:
     st.markdown("### Model Evaluation Matrix")
@@ -107,7 +107,7 @@ with tab2:
         st.plotly_chart(fig_r2, use_container_width=True)
 
 with tab3:
-    st.markdown("### 🧠 Deep Learning vs. Tree-Based Ensembles")
+    st.markdown("Deep Learning vs. Tree-Based Ensembles")
 
     col_text, col_chart = st.columns([1, 1])
 

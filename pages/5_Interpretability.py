@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Interpretability", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="LFB Interpretability", layout="wide")
 #st.logo("assets/lfb_logo.png")
 
 st.title("Model Interpretability (SHAP)")
@@ -73,7 +73,7 @@ except Exception as e:
 # 3. Interactive Visualization Tabs
 # -----------------------------------------------------------------------------
 if data_loaded:
-    tab1, tab2, tab3 = st.tabs(["🌍 Global Summary", "📈 Feature Dependence", "🔬 Local Incident Breakdown"])
+    tab1, tab2, tab3 = st.tabs(["Global Summary", "Feature Dependence", "Local Incident Breakdown"])
 
     with tab1:
         st.markdown("### Global Feature Impact (Summary Plot)")

@@ -5,13 +5,11 @@ import datetime
 import joblib
 import plotly.graph_objects as go
 from sklearn.metrics import root_mean_squared_error
-import os # Add this at the very top of your file with the other imports if it isn't there
+import os
 # -----------------------------------------------------------------------------
 # 1. Page Configuration & Logo
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="LFB Time Series", page_icon="📈", layout="wide")
-#st.logo("assets/lfb_logo.png")
-
+st.set_page_config(page_title="LFB Time Series", layout="wide")
 st.title("Time Series Analysis & Forecasting")
 st.markdown("Predictive forecasting of London Fire Brigade average attendance times using optimized Prophet models for daily and monthly aggregations.")
 st.divider()
@@ -142,7 +140,7 @@ def plot_interactive_forecast(df_actual, df_pred, test_size, title, y_label, cut
 # -----------------------------------------------------------------------------
 # 4. Forecasting Dashboards (Tabs)
 # -----------------------------------------------------------------------------
-tab1, tab2, tab3 = st.tabs(["📅 Daily Forecast", "🗓️ Monthly Forecast", "🔍 Trend & Seasonality"])
+tab1, tab2, tab3 = st.tabs(["Daily Forecast", "Monthly Forecast", "Trend & Seasonality"])
 
 with tab1:
     st.markdown("### Daily Average Attendance Time Forecast")
@@ -187,7 +185,7 @@ with tab2:
         st.plotly_chart(fig_m, use_container_width=True)
 
 with tab3:
-    st.markdown("### Time Series Decomposition (Daily Model)")
+    st.markdown("Time Series Decomposition (Daily Model)")
     st.markdown("Breaking down the historical data into structural components: overall trend, weekly variations, and yearly seasonality.")
 
     try:
